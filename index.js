@@ -2,138 +2,30 @@
 
 import fs from 'fs';
 import path from 'node:path'
-// const path = require('path');
+import { defaultOptions } from './cli.config.json'
+import { parseOptions } from './services/optionParser';
+import {
+    componentClassTemplate,
+    componentFunctionTemplate,
+    styleTemplate
+} from './services/templates';
 
-const validOptions = {
-    name: 'name',
-    n: 'name',
-    dir: 'dir',
-    d: 'dir',
-    style: 'style',
-    s: 'style',
-    cmpType: 'cmpType',
-    'cmp-type': 'cmpType',
-    ct: 'cmpType'
-}
 
-const defaultOptions = {
-    dir: 'cmps',
-    style: 'scss',
-    cmpType: 'func'
-}
+createComponent()
 
-const cleanOption = (op) => {
-    if (op.includes('--')) {
-        op = op.substr(2, op.length)
-        return validOptions[op]
-    }
-
-    if (op.includes('-')) {
-        op = op.substr(1, op.length)
-        return validOptions[op]
-    }
-
-    throw "option name must start with '--' or '-"
-}
-
-const validateOption = (op) => {
-    if (!validOptions[op]) throw `'${op}' is not a valid option!`
-}
-
-const validateValue = (val) => {
-    if (val === null || val === undefined || val === '') {
-        throw 'each option must have value!'
-    }
-}
-
-const parseOptions = (args) => {
-    const options = Object.assign({}, defaultOptions)
-
-    for (let i = 0; i < args.length; i = i + 2) {
-        const op = cleanOption(args[i])
-        const val = args[i + 1]
-
-        validateOption(op)
-        validateValue(val)
-
-        options[op] = val
-    }
-
-    if (!options.name) throw 'name is required!'
-
-    return options
-}
-
-const getKababCase = (str) => {
-    return str.split('').map((letter, idx) => {
-        if (idx === 0) return letter.toLowerCase();
-        const isUpper = (letter === letter.toUpperCase())
-        return (isUpper) ? `-${letter.toLowerCase()}` : letter;
-    }).join('');
-}
-
-const componentClassTemplate = (cmpName, style) => `
-import React, { Component } from 'react'
-
-import './${cmpName}.${style}'
-
-class ${cmpName} extends Component {
-
-    render() {
-        return (
-            <div className='${getKababCase(cmpName)}'>${cmpName}</div>
-            
-        )
-    }
-}
-
-export default ${cmpName}
-`
-
-const componentFunctionTemplate = (cmpName, style) => `
-//import React, { useState, useEffect } from 'react';
-import './${cmpName}.${style}'
-
-const ${cmpName} = (props) => {
-
-    return (
-        <div className='${getKababCase(cmpName)}'>${cmpName}</div>
-
-    )
-}
-
-export default ${cmpName}
-`
-
-const styleTemplate = (cmpName) => {
-    return `/*@import '../../style/setup/var.scss';*/
-
-    .${getKababCase(cmpName)} {}`
-}
-
-const showHelp = () => {
-    console.log('create-component usage:')
-    console.log('node create-component --name <cmp-name> [--dir <name>] [--cmp-type <class|func>] [--style <type>]')
-    console.log('')
-    console.log('   --name      required')
-    console.log(`   --dir       optional, default: ${defaultOptions.dir}`)
-    console.log(`   --cmpType   optional, default: ${defaultOptions.cmpType}`)
-    console.log(`   --style     optional, default: ${defaultOptions.style}`)
-}
-
-const run = () => {
+function createComponent() {
     try {
-        console.log("🚀 ~ file: create-component.js:125 ~ run ~ process.argv:", process.argv)
         const args = process.argv.splice(2)
         
         if (args[0] === '--help' || args[0] === '--') {
             showHelp()
             return
         }
-
+        
         const options = parseOptions(args)
         const { name, dir, style, cmpType } = options
         const rootDir = path.join(`./src/${dir}/${name}`)
+        console.log("cmp-cli >> create component:\n", { name, dir, style, cmpType, rootDir })
 
         fs.mkdirSync(rootDir);
 
@@ -151,6 +43,17 @@ const run = () => {
     }
 }
 
-run();
+function showHelp() {
+    return `
+create-component usage:
+cmp-cli --name <cmp-name> [--dir <name>] [--cmp-type <class|func>] [--style <type>]
+
+--name    (-n)  required
+--dir     (-d)  optional, default: ${defaultOptions.dir}
+--cmpType (-ct) optional, default: ${defaultOptions.cmpType}
+--style   (-s)  optional, default: ${defaultOptions.style}
+`
+}
+
 
 

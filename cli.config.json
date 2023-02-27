@@ -1,0 +1,21 @@
+{
+    "defaultOptions": {
+        "dir": "cmps",
+        "style": "scss",
+        "cmpType": "func"
+    },
+    "validOptions" : {
+        "name": "name",
+        "n": "name",
+        
+        "dir": "dir",
+        "d": "dir",
+
+        "style": "style",
+        "s": "style",
+
+        "cmpType": "cmpType",
+        "cmp-type": "cmpType",
+        "ct": "cmpType"
+    }
+}
