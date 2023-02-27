@@ -2,7 +2,11 @@
 
 import fs from 'fs';
 import path from 'node:path'
-import { defaultOptions } from './cli.config.json'
+
+import { createRequire } from "module";
+const require = createRequire(import.meta.url);
+const { defaultOptions } = require('./cli.config.json')
+
 import { parseOptions } from './services/optionParser.js';
 import {
     componentClassTemplate,

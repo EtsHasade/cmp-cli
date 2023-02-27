@@ -1,4 +1,7 @@
-import { defaultOptions, validOptions } from './cli.config.json'
+import { createRequire } from "module";
+const require = createRequire(import.meta.url);
+const { defaultOptions, validOptions } = require('../cli.config.json')
+
 
 
 export const cleanOption = (op) => {

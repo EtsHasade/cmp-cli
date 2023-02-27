@@ -1,6 +1,6 @@
 {
   "name": "@elhanan_avihail/cmp-cli",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "create cmp",
   "main": "index.js",
   "type": "module",
