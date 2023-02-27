@@ -9,7 +9,7 @@ run in the cmd: `cmpl-cli --name MyComponnetName`
 
 Valid options:
 ```
-    --name | --n: (componnet name)  -> MyComponnetName
+    --name | --n: (component name)  -> MyComponentName
     --dir  | --d: 'components directory'   ->  `cmps`, res: `src\cmps` (src + dir-path)
     --style| --s: 'style file type' -> css | scss
     --cmpType |--cmp-type | --ct: 'component type'  -> func | class,
