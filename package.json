@@ -1,0 +1,24 @@
+{
+  "name": "@elhanan_avihail/cmp-cli",
+  "version": "1.0.0",
+  "description": "create cmp",
+  "main": "index.js",
+  "type": "module",
+  "bin": {
+    "cmp-cli" : "index.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EtsHasade/cmp-cli.git"
+  },
+  "author": "elhanan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/EtsHasade/cmp-cli/issues"
+  },
+  "homepage": "https://github.com/EtsHasade/cmp-cli#readme"
+}
