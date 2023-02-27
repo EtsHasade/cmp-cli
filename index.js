@@ -3,12 +3,12 @@
 import fs from 'fs';
 import path from 'node:path'
 import { defaultOptions } from './cli.config.json'
-import { parseOptions } from './services/optionParser';
+import { parseOptions } from './services/optionParser.js';
 import {
     componentClassTemplate,
     componentFunctionTemplate,
     styleTemplate
-} from './services/templates';
+} from './services/templates.js';
 
 
 createComponent()

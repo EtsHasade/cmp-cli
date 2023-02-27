@@ -1,4 +1,4 @@
-import { getKababCase } from "./util"
+import { getKababCase } from "./util.js"
 
 export const componentClassTemplate = (cmpName, style) => `
 import React, { Component } from 'react'
